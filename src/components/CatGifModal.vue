@@ -12,13 +12,17 @@ const loadGif = () => {
   gifUrl.value = `${baseUrl}?ts=${Date.now()}`;
 }
 
+const props = defineProps<{
+  size?: "small" | "default" | "large"
+}>()
+
 onMounted(() => {
   loadGif();
 })
 </script>
 
 <template>
-  <el-button type="primary" @click="isOpen = true">🐈 Показать</el-button>
+  <el-button type="primary" :size="props.size ?? 'default'" @click="isOpen = true">🐈 Показать</el-button>
   <el-dialog
       v-model="isOpen"
       width="640"

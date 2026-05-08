@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ElMessage } from 'element-plus'
 import {
   Cat1,
   Cat2,
@@ -54,6 +55,104 @@ const stickers = [
   { id: 24, component: Cat24 },
   { id: 25, component: Cat25 },
 ]
+
+const stickerElements = new Map<number, HTMLElement>()
+
+const setStickerElement = (id: number, element: unknown) => {
+  if (element instanceof HTMLElement) {
+    stickerElements.set(id, element)
+    return
+  }
+
+  stickerElements.delete(id)
+}
+
+const copyStickerAsPng = async (id: number) => {
+  const container = stickerElements.get(id)
+  const svg = container?.querySelector('svg')
+
+  if (!(svg instanceof SVGSVGElement)) {
+    ElMessage.error('Не удалось найти SVG для копирования')
+    return
+  }
+
+  if (!navigator.clipboard || typeof ClipboardItem === 'undefined') {
+    ElMessage.error('Буфер обмена PNG не поддерживается в этом браузере')
+    return
+  }
+
+  try {
+    const pngBlob = await renderSvgToPng(svg)
+    await navigator.clipboard.write([
+      new ClipboardItem({
+        'image/png': pngBlob,
+      }),
+    ])
+
+    ElMessage.success(`Cat${id} скопирован как PNG`)
+  } catch {
+    ElMessage.error('Не удалось скопировать стикер как PNG')
+  }
+}
+
+const renderSvgToPng = async (svgElement: SVGSVGElement) => {
+  const serializedSvg = new XMLSerializer().serializeToString(svgElement)
+  const svgBlob = new Blob([serializedSvg], { type: 'image/svg+xml;charset=utf-8' })
+  const objectUrl = URL.createObjectURL(svgBlob)
+
+  const sourceWidth =
+    Number(svgElement.getAttribute('width')) ||
+    svgElement.viewBox.baseVal.width ||
+    svgElement.clientWidth ||
+    128
+  const sourceHeight =
+    Number(svgElement.getAttribute('height')) ||
+    svgElement.viewBox.baseVal.height ||
+    svgElement.clientHeight ||
+    128
+
+  const maxExportSize = 1024
+  const scale = maxExportSize / Math.max(sourceWidth, sourceHeight)
+  const width = Math.max(1, Math.round(sourceWidth * scale))
+  const height = Math.max(1, Math.round(sourceHeight * scale))
+
+  try {
+    const image = await loadImage(objectUrl)
+    const canvas = document.createElement('canvas')
+    canvas.width = width
+    canvas.height = height
+
+    const context = canvas.getContext('2d')
+    if (!context) {
+      throw new Error('Canvas 2D context is unavailable')
+    }
+
+    context.clearRect(0, 0, width, height)
+    context.drawImage(image, 0, 0, width, height)
+
+    const pngBlob = await canvasToBlob(canvas)
+    if (!pngBlob) {
+      throw new Error('PNG blob is empty')
+    }
+
+    return pngBlob
+  } finally {
+    URL.revokeObjectURL(objectUrl)
+  }
+}
+
+const loadImage = (src: string) =>
+  new Promise<HTMLImageElement>((resolve, reject) => {
+    const image = new Image()
+    image.onload = () => resolve(image)
+    image.onerror = () => reject(new Error('Image loading failed'))
+    image.src = src
+  })
+
+const canvasToBlob = (canvas: HTMLCanvasElement) =>
+  new Promise<Blob | null>((resolve) => {
+    canvas.toBlob((blob) => resolve(blob), 'image/png')
+  })
 </script>
 
 <template>
@@ -74,9 +173,15 @@ const stickers = [
         :lg="4"
         :xl="4"
       >
-        <el-card shadow="hover" style="margin-bottom: 16px">
+        <el-card
+          shadow="hover"
+          style="margin-bottom: 16px; cursor: pointer"
+          @click="copyStickerAsPng(sticker.id)"
+        >
           <el-space direction="vertical" alignment="center" fill style="width: 100%">
-            <component :is="sticker.component" />
+            <div :ref="(element) => setStickerElement(sticker.id, element)">
+              <component :is="sticker.component" />
+            </div>
             <el-tag type="info" effect="plain">Cat{{ sticker.id }}</el-tag>
           </el-space>
         </el-card>
