@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": false,
+    "noEmit": false,
+    "outDir": "./dist/types",
+    "rootDir": "./src"
+  },
+  "include": [
+    "src/index.ts",
+    "src/components/**/*.vue",
+    "src/components/**/*.ts",
+    "src/composables/**/*.ts",
+    "src/models/**/*.ts"
+  ],
+  "exclude": [
+    "src/main.ts",
+    "src/App.vue",
+    "src/views/**/*",
+    "src/assets/**/*"
+  ]
+}

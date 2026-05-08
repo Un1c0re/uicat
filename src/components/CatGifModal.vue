@@ -20,7 +20,7 @@ onMounted(() => {
   <el-button type="primary" @click="isOpen = true">🐈 Показать</el-button>
   <el-dialog
       v-model="isOpen"
-      width="820"
+      width="640"
       align-center
       destroy-on-close
       :show-close="false"

@@ -1,28 +1,45 @@
 {
   "name": "uicat",
-  "private": true,
+  "private": false,
   "version": "0.0.1",
   "type": "module",
+  "files": [
+    "dist/uicat.js",
+    "dist/uicat.umd.cjs",
+    "dist/types"
+  ],
+  "main": "./dist/uicat.umd.cjs",
+  "module": "./dist/uicat.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/uicat.js",
+      "require": "./dist/uicat.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vite build --config vite.lib.config.ts && vue-tsc --project tsconfig.lib.json",
     "preview": "vite preview"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "element-plus": "^2.13.7",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
     "@module-federation/bridge-vue3": "^2.0.0",
     "@module-federation/enhanced": "^2.0.1",
     "@module-federation/vite": "^1.11.0",
     "@tailwindcss/vite": "^4.2.4",
-    "element-plus": "^2.13.7",
-    "tailwindcss": "^4.2.4",
-    "vue": "^3.5.32"
-  },
-  "devDependencies": {
     "@types/node": "^24.12.2",
     "@vitejs/plugin-vue": "^6.0.6",
     "@vue/tsconfig": "^0.9.1",
+    "element-plus": "^2.13.7",
+    "tailwindcss": "^4.2.4",
     "typescript": "~6.0.2",
     "vite": "^8.0.10",
+    "vue": "^3.5.32",
     "vue-tsc": "^3.2.7"
   }
 }

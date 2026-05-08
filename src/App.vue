@@ -1,14 +1,21 @@
 <script setup lang="ts">
 import CatGifModal from './components/CatGifModal.vue'
+import CatStickerGallery from './components/CatStickerGallery.vue'
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <header class="w-full h-125">
-      <h1 class="font-bold text-4xl">MedInfoCenter.Ui.Кить</h1>
-    </header>
-    <main class="flex flex-col items-center">
-      <CatGifModal/>
-    </main>
-  </div>
+  <el-container style="padding: 24px; max-width: 1440px; margin: 0 auto">
+    <el-main>
+      <el-space direction="vertical" fill size="large" style="width: 100%">
+        <p class="font-bold text-2xl">MedInfoCenter.Ui.Кить</p>
+        <el-card shadow="never">
+          <div class="h-96 flex items-center justify-center">
+            <CatGifModal/>
+          </div>
+        </el-card>
+
+        <CatStickerGallery/>
+      </el-space>
+    </el-main>
+  </el-container>
 </template>

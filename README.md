@@ -1,5 +1,29 @@
-# Vue 3 + TypeScript + Vite
+# UiCat
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Набор Vue-стикеров с котиками, который можно собрать в npm-пакет и использовать в любом Vue 3 проекте.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Сборка
+
+```bash
+npm install
+npm run build
+npm pack
+```
+
+## Использование
+
+```ts
+import { createApp } from 'vue'
+import UiCat from 'uicat'
+
+const app = createApp(App)
+
+app.use(UiCat)
+```
+
+Если используются `CatGifModal` или `CatStickerGallery`, в проекте нужно также подключить `Element Plus` и его CSS.
+
+```ts
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+```
