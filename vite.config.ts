@@ -7,6 +7,7 @@ import { fileURLToPath, URL } from 'node:url'
 const srcPath = fileURLToPath(new URL('./src', import.meta.url))
 
 export default defineConfig({
+  base: '/uicat/',
   plugins: [
     vue(),
     tailwindcss(),
