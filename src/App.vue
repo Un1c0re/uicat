@@ -3,12 +3,10 @@ import CatGifModal from './components/CatGifModal.vue'
 import CatStickerGallery from './components/CatStickerGallery.vue'
 import CodeHighlight from './components/CodeHighlight.vue'
 
-const buildCommands = `npm install
-npm run build
-npm pack`
+const installCommands = `npm install @un1c0re/uicat`
 
 const usageExample = `import { createApp } from 'vue'
-import UiCat from 'uicat'
+import UiCat from '@un1c0re/uicat'
 
 const app = createApp(App)
 
@@ -30,8 +28,8 @@ import 'element-plus/dist/index.css'`
       </el-space>
 
       <el-space direction="vertical" fill style="width: 100%" class="text-left">
-        <p class="text-lg">Сборка</p>
-        <CodeHighlight :code="buildCommands" language="bash"/>
+        <p class="text-lg">Установка</p>
+        <CodeHighlight :code="installCommands" language="bash"/>
       </el-space>
 
       <el-space direction="vertical" fill style="width: 100%" class="text-left">

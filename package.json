@@ -1,5 +1,6 @@
 {
-  "name": "uicat",
+  "name": "@un1c0re/uicat",
+  "repository": "https://github.com/Un1c0re/uicat.git",
   "private": false,
   "version": "0.0.1",
   "type": "module",
@@ -46,5 +47,8 @@
   },
   "dependencies": {
     "prismjs": "^1.30.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
