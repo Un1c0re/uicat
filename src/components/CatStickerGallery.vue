@@ -157,12 +157,6 @@ const canvasToBlob = (canvas: HTMLCanvasElement) =>
 
 <template>
   <el-space direction="vertical" fill size="large" style="width: 100%">
-    <el-card shadow="never">
-      <el-space direction="vertical" size="small" fill>
-        <el-text tag="h2" size="large">Коллекция стикеров</el-text>
-      </el-space>
-    </el-card>
-
     <el-row :gutter="16">
       <el-col
         v-for="sticker in stickers"

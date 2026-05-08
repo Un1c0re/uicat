@@ -21,7 +21,7 @@ const app = createApp(App)
 app.use(UiCat)
 ```
 
-Если используются `CatGifModal` или `CatStickerGallery`, в проекте нужно также подключить `Element Plus` и его CSS.
+Если используются `CatGifModal`, в проекте нужно также подключить `Element Plus` и его CSS.
 
 ```ts
 import ElementPlus from 'element-plus'
