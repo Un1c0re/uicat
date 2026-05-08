@@ -1,7 +1,6 @@
 import type { App, Component } from 'vue'
 
 import CatGifModal from './components/CatGifModal.vue'
-import CatStickerGallery from './components/CatStickerGallery.vue'
 import {
   Cat1,
   Cat2,
@@ -26,6 +25,8 @@ import {
   Cat21,
   Cat22,
   Cat23,
+  Cat24,
+  Cat25,
 } from './components/ui'
 
 export {
@@ -52,8 +53,9 @@ export {
   Cat21,
   Cat22,
   Cat23,
+  Cat24,
+  Cat25,
   CatGifModal,
-  CatStickerGallery,
 }
 
 export const catStickers = {
@@ -80,6 +82,8 @@ export const catStickers = {
   Cat21,
   Cat22,
   Cat23,
+  Cat24,
+  Cat25,
 } satisfies Record<string, Component>
 
 export const catStickerList = Object.entries(catStickers).map(([name, component]) => ({
@@ -100,7 +104,6 @@ const UiCat = {
     })
 
     app.component(`${prefix}CatGifModal`, CatGifModal)
-    app.component(`${prefix}CatStickerGallery`, CatStickerGallery)
   },
 }
 

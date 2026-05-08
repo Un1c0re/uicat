@@ -2,7 +2,8 @@
 import {onMounted, ref} from 'vue'
 
 const isOpen = ref(false)
-const baseUrl = 'https://cataas.com/cat/gif'
+// const baseUrl = 'https://cataas.com/cat/gif'
+const baseUrl = 'http://62.60.228.113:1337/cat/gif'
 const loading = ref(false);
 const gifUrl = ref("");
 

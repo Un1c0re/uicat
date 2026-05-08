@@ -23,6 +23,8 @@ import {
   Cat21,
   Cat22,
   Cat23,
+  Cat24,
+  Cat25,
 } from './ui'
 
 const stickers = [
@@ -49,6 +51,8 @@ const stickers = [
   { id: 21, component: Cat21 },
   { id: 22, component: Cat22 },
   { id: 23, component: Cat23 },
+  { id: 24, component: Cat24 },
+  { id: 25, component: Cat25 },
 ]
 </script>
 
@@ -57,7 +61,6 @@ const stickers = [
     <el-card shadow="never">
       <el-space direction="vertical" size="small" fill>
         <el-text tag="h2" size="large">Коллекция стикеров</el-text>
-        <el-text>Стикеры можно импортировать по одному или подключать как весь пакет.</el-text>
       </el-space>
     </el-card>
 

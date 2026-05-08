@@ -13,7 +13,7 @@ export default defineConfig({
       fileName: 'uicat',
       formats: ['es', 'umd'],
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: ['vue', 'element-plus'],
       output: {
         exports: 'named',
